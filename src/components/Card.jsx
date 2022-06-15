@@ -6,7 +6,7 @@ export class Card extends Component {
     return (
       <div className="container grow p-7 flex flex-col bg-blue-400 max-w-sm mx-auto rounded-md space-y-4">
         <img
-          src={this.props.image}
+          src={`https://image.tmdb.org/t/p/w500${this.props.image}`}
           alt={this.props.image}
           width="350"
           height="450"
@@ -15,7 +15,8 @@ export class Card extends Component {
         <a href="/Detail" className="text-center text">
           {this.props.title}
         </a>
-        <button className="bg-red-500 flex justify-center items-center p-2 space-x-5">
+
+        <button className="bg-red-500 hover:bg-red-400 flex justify-center items-center p-2 space-x-5 mt-auto">
           <FaHeart /> <p>Add Favorite</p>
         </button>
       </div>
