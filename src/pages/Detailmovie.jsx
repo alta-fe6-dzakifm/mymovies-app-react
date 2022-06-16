@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Lottie from "lottie-react";
 
+import CinemaLoading from "../assets/animations/cinema_animation.json";
 import { withRouter } from "../utils/navigation";
 import Layout from "../components/Layout";
 
 class Detail extends Component {
   state = {
     data: {},
-    title: "WELCOME",
     loading: true,
   };
 
   componentDidMount() {
-    this.fetchData();
+    setTimeout(() => {
+      this.fetchData();
+    }, 2000);
   }
 
   fetchData() {
@@ -34,7 +37,7 @@ class Detail extends Component {
   render() {
     const { data, loading } = this.state;
     if (loading) {
-      return <div>LOADING....</div>;
+      return <Lottie loop autoplay animationData={CinemaLoading} />;
     } else {
       return (
         <Layout>
