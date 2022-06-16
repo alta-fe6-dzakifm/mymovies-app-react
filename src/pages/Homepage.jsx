@@ -15,7 +15,7 @@ class Homepage extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.fetchData();
-    }, 5000);
+    }, 2000);
   }
 
   // simulasi pemanggilan
@@ -41,7 +41,12 @@ class Homepage extends Component {
         <Layout>
           <div className="grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-4 lg:grid-cols-5 m-2 gap-3">
             {this.state.data.map((item) => (
-              <Card key={item.id} title={item.title} image={item.poster_path} />
+              <Card
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                image={item.poster_path}
+              />
             ))}
           </div>
         </Layout>

@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 export class Card extends Component {
   render() {
     return (
-      <div className="container grow p-7 flex flex-col bg-blue-400 max-w-sm mx-auto rounded-md space-y-4">
+      <div className="container grow p-7 flex flex-col bg-blue-400 max-w-sm mx-auto rounded-md ">
         <img
           src={`https://image.tmdb.org/t/p/w500${this.props.image}`}
           alt={this.props.image}
@@ -12,7 +12,7 @@ export class Card extends Component {
           height="450"
           className="mx-auto"
         />
-        <a href="/Detail" className="text-center text">
+        <a href={"/movie/" + this.props.id} className="text-center text my-4">
           {this.props.title}
         </a>
 
