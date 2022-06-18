@@ -19,7 +19,7 @@ const Detail = (props) => {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movie_id}?api_key=0e6ab6977a441feefe861571f011429c&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
       )
       .then((res) => {
         const { data } = res;
