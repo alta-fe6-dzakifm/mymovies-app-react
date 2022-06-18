@@ -19,12 +19,10 @@ const Detail = (props) => {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.REACT_APP_API_KEY}&append_to_response=videos`
       )
       .then((res) => {
         const { data } = res;
-        // console.log(data);
-        // this.setState({ data });
         setData(data);
       })
       .catch((err) => alert(err.toString()))
@@ -83,6 +81,18 @@ const Detail = (props) => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="p-6 flex justify-center items-center bg-gradient-to-r from-gray-500 to-slate-800">
+          <iframe
+            key={data.videos.results[0].key}
+            width="600"
+            height="350"
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            title={data.name}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
       </Layout>
     );
