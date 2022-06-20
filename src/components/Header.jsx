@@ -7,14 +7,9 @@ const Header = () => {
       <div className="text-white font-bold italic text-3xl ml-5">
         <a href="/">Cinepolis</a>
       </div>
-      <ul className="text-white ml-auto flex flex-row space-x-8">
-        <li>
-          <a href="/">Hot Movies</a>
-        </li>
-        <li>
-          <a href="/">Favorite</a>
-        </li>
-      </ul>
+      <div className="text-white ml-auto flex space-x-8">
+        <a href="/">Favorite</a>
+      </div>
     </nav>
   );
 };

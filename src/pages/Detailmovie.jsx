@@ -34,14 +34,16 @@ const Detail = (props) => {
   } else {
     return (
       <Layout>
-        <div className="h-full w-full relative flex">
-          <img
-            src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-            alt={data.backdrop_path}
-            className="relative w-full"
-          />
-          <div className="absolute h-full flex">
-            <div className="h-3/4 w-3/4 m-auto grid grid-flow-col bg-slate-500 bg-opacity-60">
+        <div
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${data.backdrop_path}`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className=" h-full flex">
+            <div className="h-auto w-3/4 m-auto grid grid-flow-col bg-slate-500 bg-opacity-60">
               <div className="col-span-1 m-auto p-7 flex flex-col">
                 <img
                   src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
@@ -81,18 +83,24 @@ const Detail = (props) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="p-6 flex justify-center items-center bg-gradient-to-r from-gray-500 to-slate-800">
-          <iframe
-            key={data.videos.results[0].key}
-            width="600"
-            height="350"
-            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
-            title={data.name}
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <div className=" flex justify-center items-center py-10">
+            {data.videos.results.length === 0 ? (
+              <div>
+                <h1 className="text-center">No Videos</h1>
+              </div>
+            ) : (
+              <iframe
+                key={data.videos.results[0].key}
+                width="600"
+                height="350"
+                src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+                title={data.name}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            )}
+          </div>
         </div>
       </Layout>
     );
