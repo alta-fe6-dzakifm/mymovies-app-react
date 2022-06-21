@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Layout from "../components/Layout";
-import Card from "../components/Card";
-import Lottie from "lottie-react";
-import { withRouter } from "../utils/navigation";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Lottie from "lottie-react";
+import axios from "axios";
 
+import { reduxAction } from "../utils/redux/actions/action";
 import CinemaLoading from "../assets/animations/cinema_animation.json";
 import "../styles/App.css";
+import Layout from "../components/Layout";
+import Card from "../components/Card";
+import { withRouter } from "../utils/navigation";
 
 const Homepage = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  // state = {
-  //   data: [],
-  //   loading: true,
-  // };
+
   useEffect(() => {
     fetchData();
   }, []);
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     this.fetchData();
-  //   }, 2000);
-  // }
 
   // simulasi pemanggilan
   function fetchData() {
@@ -34,8 +29,6 @@ const Homepage = (props) => {
       )
       .then((res) => {
         const { results } = res.data;
-        // this.setState({ data: results });
-        // console.log(res.data);
         setData(results);
       })
       .catch((err) => {
@@ -43,6 +36,20 @@ const Homepage = (props) => {
       })
       .finally(() => setLoading(false));
   }
+
+  const handleFav = (item) => {
+    const tempLocal = localStorage.getItem("favMovie");
+    if (tempLocal) {
+      const temp = JSON.parse(tempLocal);
+      temp.push(item);
+      localStorage.setItem("favMovie", JSON.stringify(temp));
+      dispatch(reduxAction("SET_FAVORITES", temp));
+    } else {
+      localStorage.setItem("favMovie", JSON.stringify([item]));
+      dispatch(reduxAction("SET_FAVORITES", [item]));
+    }
+    alert("Added to favorite");
+  };
 
   if (loading) {
     return <Lottie loop autoplay animationData={CinemaLoading} />;
@@ -56,6 +63,8 @@ const Homepage = (props) => {
               title={item.title}
               image={item.poster_path}
               onClickItem={() => navigate(`movie/${item.id}`)}
+              onClickFav={() => handleFav(item)}
+              item={item}
             />
           ))}
         </div>

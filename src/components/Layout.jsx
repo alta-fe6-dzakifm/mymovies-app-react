@@ -1,11 +1,15 @@
 import React from "react";
-import Header from "./Header";
+import CustomHeader from "../components/Header";
 
 const Layout = (props) => {
   return (
     <>
-      <Header />
-      <div>{props.children}</div>
+      <div className="w-full h-screen flex flex-col overflow-auto">
+        <CustomHeader />
+        <div className="h-full w-full bg-white dark:bg-black">
+          {props.children}
+        </div>
+      </div>
     </>
   );
 };
